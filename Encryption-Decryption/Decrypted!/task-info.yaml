@@ -1,0 +1,71 @@
+type: edu
+custom_name: stage3
+files:
+- name: test/EncryptDecryptTest.java
+  visible: false
+  text: |
+    import encryptdecrypt.Main;
+    import org.hyperskill.hstest.v6.stage.BaseStageTest;
+    import org.hyperskill.hstest.v6.testcase.PredefinedIOTestCase;
+
+    import java.util.List;
+
+    public class EncryptDecryptTest extends BaseStageTest {
+        public EncryptDecryptTest() throws Exception {
+            super(Main.class);
+        }
+
+        @Override
+        public List<PredefinedIOTestCase> generate() {
+            return List.of(
+                new PredefinedIOTestCase(
+                    "enc\n" +
+                        "Welcome to hyperskill!\n" +
+                        "5",
+                    "\\jqhtrj%yt%m~ujwxpnqq&"),
+                new PredefinedIOTestCase(
+                    "enc\n" +
+                        "Hello\n" +
+                        "0",
+                    "Hello"),
+                new PredefinedIOTestCase(
+                    "enc\n" +
+                        "012345678\n" +
+                        "1",
+                    "123456789"),
+                new PredefinedIOTestCase(
+                    "dec\n" +
+                        "\\jqhtrj%yt%m~ujwxpnqq&\n" +
+                        "5",
+                    "Welcome to hyperskill!"),
+                new PredefinedIOTestCase(
+                    "dec\n" +
+                        "Hello\n" +
+                        "0",
+                    "Hello"),
+                new PredefinedIOTestCase(
+                    "dec\n" +
+                        "222233334444\n" +
+                        "1",
+                    "111122223333")
+            );
+        }
+    }
+  learner_created: false
+- name: src/encryptdecrypt/Main.java
+  visible: true
+  text: "package encryptdecrypt;\nimport java.util.Scanner;\npublic class Main {\n\
+    \tpublic static void main(String args[]){\n\t\t\n\tScanner scanner = new Scanner(System.in);\n\
+    \t\t//System.out.println(\"Please Enter the message: \");\n\t\tString message\
+    \ = scanner.nextLine();\n\t\t//System.out.println(\"Please enter the key: \");\n\
+    \t\tint key = scanner.nextInt();\n\t\tString result = \"\";\n\t\t\n\t\tint a=0;\n\
+    \t\twhile(a<message.length()) {\n\t\t\tchar newChar = message.charAt(a);\n\t\t\
+    \tif(message.codePointAt(a) >= 'a' && message.codePointAt(a) <='z') {\n\t\t\t\t\
+    int code = message.codePointAt(a)+key;\n\t\t\t\tif(code > 122) {\n\t\t\t\t\tint\
+    \ interval = code-122;\n\t\t\t\t\tcode=96+interval;\n\t\t\t\t}\n\t\t\t\tnewChar\
+    \ = (char)code;\n\t\t\t}\n\t\t\tresult = result+newChar;\n\t\t\ta++;\n\t\t}\n\t\
+    \tSystem.out.println(result);\n\t\tscanner.close();\n\t}\n}\n"
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/46/stages/247/implement
+status: Solved
+record: 3
